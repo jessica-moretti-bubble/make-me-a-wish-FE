@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import type { AuthStore } from "../model/auth.model";
+import type { AuthStore } from "../model/store.model";
 
 export const useAuthStore = defineStore("auth", {
   state: (): AuthStore => ({
@@ -35,6 +35,15 @@ export const useAuthStore = defineStore("auth", {
     },
     setUsername(username?: string) {
       if (username) this.username = username;
+    },
+    clearUser() {
+      this.username = undefined;
+      this.email = undefined;
+      this.name = undefined;
+      this.surname = undefined;
+      this.profileId = undefined;
+      this.accessToken = undefined;
+      this.profileIsCompleted = undefined;
     },
   },
   persist: true,

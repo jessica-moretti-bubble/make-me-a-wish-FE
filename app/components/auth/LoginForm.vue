@@ -30,17 +30,17 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useField, useForm } from 'vee-validate'
 import { useRouter } from 'vue-router'
 import { ref, watch } from 'vue'
-import { LoginPayloadSchema } from '~/schemas/auth.schema'
 import { useAuth } from '~/composables/useAuth'
 import GenericButton from '../common/GenericButton.vue'
 import GenericInput from '../common/GenericInput.vue'
+import { LoginSchemaPayload } from '~/schemas/payloads/auth.payload.schema'
 
 const router = useRouter()
 const { login, error: loginError } = useAuth()
 
 
 const { handleSubmit, meta } = useForm({
-    validationSchema: toTypedSchema(LoginPayloadSchema),
+    validationSchema: toTypedSchema(LoginSchemaPayload),
 })
 
 const serverError = ref('')

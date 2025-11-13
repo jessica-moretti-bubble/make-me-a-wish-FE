@@ -27,7 +27,7 @@ import { toTypedSchema } from '@vee-validate/zod'
 import GenericButton from '~/components/common/GenericButton.vue'
 import GenericInput from '~/components/common/GenericInput.vue'
 import UsernameRequirementsBox from '~/components/auth/UsernameRequirementsBox.vue'
-import { ProfileConfirmationPayloadSchema } from '~/schemas/auth.schema'
+import { ProfileConfirmationSchemaPayload } from '~/schemas/payloads/profile.payload.schema'
 
 const router = useRouter()
 
@@ -37,7 +37,7 @@ const { confirmProfile, isSuccess } = useProfileConfirmation()
 
 
 const { handleSubmit, meta } = useForm({
-    validationSchema: toTypedSchema(ProfileConfirmationPayloadSchema),
+    validationSchema: toTypedSchema(ProfileConfirmationSchemaPayload),
 })
 
 const serverError = ref('')
