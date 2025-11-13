@@ -117,7 +117,11 @@ const onSubmit = handleSubmit(async (values) => {
         await wishlistsStore.createWishlistAndRefetch(payload)
     }
     else {
-        await wishlistsStore.updateWishlistAndRefetch(payload)
+        const updatePayload = {
+            body: payload,
+            categoryId: payload._id
+        }
+        await wishlistsStore.updateWishlistAndRefetch(updatePayload)
 
     }
 

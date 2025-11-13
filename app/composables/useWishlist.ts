@@ -1,6 +1,14 @@
 import { ref } from "vue";
 import { WishlistItemSchema, type WishlistItem } from "~/model/wishlist.model";
 import {
+  GiftSchemaPayload,
+  type GiftPayload,
+} from "~/schemas/payloads/gift.payload.schema";
+import {
+  UpdateWishlistPayloadSchema,
+  type UpdateWishlistPayload,
+} from "~/schemas/payloads/wish.payload.schema";
+import {
   WishlistResponseSchema,
   type WishlistResponse,
 } from "~/schemas/responses/wishlist.response.schema";
@@ -73,16 +81,46 @@ export const createWishlist = async (payload: WishlistItem) => {
   return { error, loading, data };
 };
 
-export const updateWishlist = async (payload: WishlistItem) => {
+export const updateWishlist = async (payload: {
+  body: UpdateWishlistPayload;
+  categoryId: string;
+}) => {
   const loading = ref(true);
   const error = ref<Error | null>(null);
-  const parsedPayload = WishlistResponseSchema.parse(payload);
+  const parsedPayload = UpdateWishlistPayloadSchema.parse(payload.body);
 
   try {
-    await $fetch(`http://localhost:3001/wishlists`, {
+    await $fetch(`http://localhost:3001/wishlists/${payload.categoryId}`, {
       method: "PATCH",
       body: parsedPayload,
     });
+  } catch (err) {
+    error.value = err as Error;
+  } finally {
+    loading.value = false;
+  }
+
+  return { error, loading };
+};
+
+export const updateGift = async (payload: {
+  body: GiftPayload;
+  params: { categoryId: string; giftId: string };
+}) => {
+  const loading = ref(true);
+
+  const error = ref<Error | null>(null);
+
+  const parsedPayload = GiftSchemaPayload.parse(payload.body);
+
+  try {
+    await $fetch(
+      `http://localhost:3001/wishlists/${payload.params.categoryId}/gifts/${payload.params.giftId}`,
+      {
+        method: "PATCH",
+        body: parsedPayload,
+      }
+    );
   } catch (err) {
     error.value = err as Error;
   } finally {

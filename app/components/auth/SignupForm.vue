@@ -39,7 +39,7 @@ import { useForm, useField } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import GenericButton from '~/components/common/GenericButton.vue'
 import GenericInput from '~/components/common/GenericInput.vue'
-import { SignupPayloadSchema } from '~/schemas/auth.schema'
+import { RegisterSchemaPayload } from '~/schemas/payloads/auth.payload.schema'
 
 const router = useRouter()
 
@@ -47,7 +47,7 @@ const { signup, isSuccess } = useSignup()
 
 
 const { handleSubmit, meta } = useForm({
-    validationSchema: toTypedSchema(SignupPayloadSchema),
+    validationSchema: toTypedSchema(RegisterSchemaPayload),
 })
 
 

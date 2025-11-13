@@ -184,6 +184,21 @@ const onSubmit = handleSubmit(async (values) => {
 
     }
 
+    if (props.initialData) {
+        const updatePayload = {
+            body: payload,
+            params: {
+                categoryId: wishlistsStore.selectedCategory?._id ?? '',
+                giftId: props.initialData.id ?? ''
+            }
+        }
+        await useWishlistsStore().updateGiftAndRefetch(updatePayload)
+        isLoading.value = false
+
+        router.push('/dashboard')
+        return
+    }
+
 
     await createWish(payload)
 

@@ -29,10 +29,21 @@ import { ref } from "vue";
 import { } from "~/stores/auth.store";
 import SearchInput from "../dashboard/SearchInput.vue";
 import LogoutModal from "../dashboard/LogoutModal.vue";
-
+import { getInitials } from "~/helper/text.helper";
 
 const showLogoutModal = ref(false);
 
-const usernameInitial = '??'
+const authStore = useAuthStore()
+
+const usernameInitial = computed(() =>
+    getInitials(authStore.name, authStore.surname)
+);
+
+/**
+ * 
+ * NOTA A ME STESSA: 
+ * 
+ * getInitilals in computed viene eseguita solo quando name o surname cambiano. Vue lo capisce in automatico
+ */
 
 </script>

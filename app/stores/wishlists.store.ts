@@ -1,6 +1,8 @@
 import { defineStore } from "pinia";
 import type { WishlistStore } from "~/model/store.model";
 import type { WishlistItem } from "~/model/wishlist.model";
+import type { GiftPayload } from "~/schemas/payloads/gift.payload.schema";
+import type { UpdateWishlistPayload } from "~/schemas/payloads/wish.payload.schema";
 
 export const useWishlistsStore = defineStore("wishlists", {
   state: (): WishlistStore => ({
@@ -24,15 +26,27 @@ export const useWishlistsStore = defineStore("wishlists", {
       await this.fetchWishlists();
     },
 
-    async updateWishlistAndRefetch(payload: WishlistItem) {
+    async updateWishlistAndRefetch(payload: {
+      body: UpdateWishlistPayload;
+      categoryId: string;
+    }) {
       await updateWishlist(payload);
-      this.selectedCategory = payload;
+      // this.selectedCategory = payload;
       await this.fetchWishlists();
     },
 
     async deleteWishlistAndRefetch(categoryId: string) {
       await deleteWishlist(categoryId);
       this.selectedCategory = undefined;
+      await this.fetchWishlists();
+    },
+
+    async updateGiftAndRefetch(payload: {
+      body: GiftPayload;
+      params: { categoryId: string; giftId: string };
+    }) {
+      await updateGift({ body: payload.body, params: payload.params });
+      // this.selectedCategory = payload;
       await this.fetchWishlists();
     },
   },
