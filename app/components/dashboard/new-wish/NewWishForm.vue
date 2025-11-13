@@ -39,8 +39,8 @@
 
             <div class="flex flex-col border-b border-gray-200 pb-8 gap-y-2">
 
-                <GenericInput v-model="location" label="Location (Optional)" placeholder="Cerca una location..."
-                    icon-name="material-symbols:add-location-alt-rounded" />
+                <GoogleMapsInput v-model:location="location" />
+
 
                 <p class="text-sm">Indica dove il regalo può essere trovato o acquistato</p>
 
@@ -79,6 +79,7 @@ import { useRouter } from 'vue-router';
 import WishStatusInput from './inputs/WishStatusInput.vue';
 import WishFormHeader from '../wish-form/WishFormHeader.vue';
 import { GiftSchemaPayload } from '~/schemas/payloads/gift.payload.schema';
+import GoogleMapsInput from './inputs/GoogleMapsInput.vue';
 
 
 const props = defineProps<{
@@ -86,7 +87,10 @@ const props = defineProps<{
         id: string
         title: string
         description?: string
-        location?: string
+        location?: {
+            lat: string,
+            lng: string
+        },
         locationUrl?: string
         price?: number | null
         imageKey?: string | null
@@ -110,7 +114,12 @@ onMounted(() => {
             values: {
                 title: props.initialData.title,
                 description: props.initialData.description ?? "",
-                location: props.initialData.location ?? "",
+                location: props.initialData.location
+                    ? {
+                        lat: props.initialData.location.lat ?? "",
+                        lng: props.initialData.location.lng ?? ""
+                    }
+                    : undefined,
                 locationUrl: props.initialData.locationUrl ?? "",
                 price: props.initialData.price ?? undefined,
                 isReceived: props.initialData.isReceived ?? false,
@@ -126,13 +135,14 @@ const { value: title } = useField<string>('title');
 
 const { value: description } = useField<string>('description');
 
-const { value: location } = useField<string | undefined>('location');
-
 const { value: locationUrl } = useField<string | undefined>('locationUrl');
 
 const { value: price } = useField<number | undefined>('price');
 
 const { value: isReceived } = useField<boolean>('isReceived');
+
+const { value: location } = useField<{ lat: string, lng: string } | undefined>('location')
+
 
 
 const isLoading = ref(false)
@@ -152,9 +162,6 @@ const router = useRouter()
 
 
 const onSubmit = handleSubmit(async (values) => {
-
-
-    console.log(wishlistsStore.selectedCategory?._id, 'cat')
 
     isLoading.value = true
 

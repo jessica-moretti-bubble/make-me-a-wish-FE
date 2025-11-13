@@ -37,6 +37,7 @@ export const useAuthStore = defineStore("auth", {
       if (username) this.username = username;
     },
     clearUser() {
+      const wishlistsStore = useWishlistsStore();
       this.username = undefined;
       this.email = undefined;
       this.name = undefined;
@@ -44,6 +45,7 @@ export const useAuthStore = defineStore("auth", {
       this.profileId = undefined;
       this.accessToken = undefined;
       this.profileIsCompleted = undefined;
+      wishlistsStore.selectedCategory = undefined;
     },
   },
   persist: true,

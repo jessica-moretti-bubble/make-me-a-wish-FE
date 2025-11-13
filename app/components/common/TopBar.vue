@@ -4,18 +4,15 @@
 
     <div class="flex fixed top-0 bg-white items-center justify-between p-4 border-b border-gray-200 w-full">
 
-        <p class="whitespace-nowrap font-bold text-2xl">La mia wishlist</p>
+        <RouterLink class="size-10 rounded-2xl bg-gradient-primary flex justify-center items-center cursor-pointer"
+            to="/home">
+            <Icon name="dashicons:admin-home" style="scale: 1.5; color: white;" />
+        </RouterLink>
+        <button @click="showLogoutModal = true"
+            class="rounded-full size-10 text-white flex justify-center items-center cursor-pointer bg-gradient-icon-rich">
+            <p class="uppercase">{{ usernameInitial }}</p>
+        </button>
 
-        <div class="flex items-center gap-x-8 w-[40rem]">
-
-            <SearchInput />
-
-            <button @click="showLogoutModal = true"
-                class="rounded-full size-10 text-white flex justify-center items-center cursor-pointer bg-gradient-icon-rich">
-                <p class="uppercase">{{ usernameInitial }}</p>
-            </button>
-
-        </div>
 
     </div>
 
@@ -27,9 +24,9 @@
 
 import { ref } from "vue";
 import { } from "~/stores/auth.store";
-import SearchInput from "../dashboard/SearchInput.vue";
 import LogoutModal from "../dashboard/LogoutModal.vue";
 import { getInitials } from "~/helper/text.helper";
+import { RouterLink } from "vue-router";
 
 const showLogoutModal = ref(false);
 

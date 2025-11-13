@@ -6,7 +6,12 @@ export const GiftSchema = z.object({
   categoryId: z.string().optional(),
   imageKey: z.string().optional(),
   isReceived: z.boolean().default(false).optional(),
-  location: z.string().optional(),
+  location: z
+    .object({
+      lat: z.string(),
+      lng: z.string(),
+    })
+    .optional(),
   locationUrl: z.string().optional(),
   price: z.number().nonnegative().optional(),
   _id: z.string().optional(),

@@ -1,5 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  app: {
+    pageTransition: { name: "page", mode: "out-in" },
+  },
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
 
@@ -9,12 +12,26 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxtjs/google-fonts",
     "@nuxt/icon",
+    "@nuxt/scripts",
     "@nuxt/ui",
     "@pinia/nuxt",
     "pinia-plugin-persistedstate/nuxt",
   ],
 
+  scripts: {
+    registry: {
+      googleMaps: true,
+    },
+  },
+
   runtimeConfig: {
+    public: {
+      scripts: {
+        googleMaps: {
+          apiKey: process.env.GOOGLE_MAPS_API_KEY,
+        },
+      },
+    },
     B2_KEY_ID: process.env.B2_KEY_ID,
     B2_APP_KEY: process.env.B2_APP_KEY,
     B2_BUCKET: process.env.B2_BUCKET,

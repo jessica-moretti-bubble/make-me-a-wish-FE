@@ -34,7 +34,10 @@ const normalizedWish = computed(() => {
         id: w._id ?? '',
         title: w.title,
         description: w.description ?? "",
-        location: w.location ?? "",
+        location: {
+            lat: w.location?.lat ?? '',
+            lng: w.location?.lng ?? ''
+        },
         locationUrl: w.locationUrl ?? "",
         price: w.price ?? null,
         imageKey: w.imageKey ?? null,
