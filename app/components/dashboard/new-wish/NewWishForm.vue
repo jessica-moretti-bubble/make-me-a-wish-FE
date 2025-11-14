@@ -37,12 +37,18 @@
 
             <GenericInput v-model="price" label="Prezzo / Budget (Optional)" type="number" />
 
-            <div class="flex flex-col border-b border-gray-200 pb-8 gap-y-2">
+            <div class="flex flex-col justify-start items-start border-b border-gray-200 pb-8 gap-y-2">
+                <button class="text-sm flex items-center gap-x-4 " @click="mapIsShow = !mapIsShow">
+                    <p>Indica dove il regalo può essere trovato o acquistato (Optional)</p>
+                    <Icon
+                        :name="mapIsShow ? 'material-symbols:arrow-drop-up-rounded' : 'material-symbols:arrow-drop-down-rounded'"
+                        style="scale: 2; color: black;" />
+                </button>
 
-                <GoogleMapsInput v-model:location="location" />
+
+                <GoogleMapsInput v-if="mapIsShow" v-model:location="location" />
 
 
-                <p class="text-sm">Indica dove il regalo può essere trovato o acquistato</p>
 
             </div>
 
@@ -80,6 +86,8 @@ import WishStatusInput from './inputs/WishStatusInput.vue';
 import WishFormHeader from '../wish-form/WishFormHeader.vue';
 import { GiftSchemaPayload } from '~/schemas/payloads/gift.payload.schema';
 import GoogleMapsInput from './inputs/GoogleMapsInput.vue';
+
+const mapIsShow = ref(false)
 
 
 const props = defineProps<{

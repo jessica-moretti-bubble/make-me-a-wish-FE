@@ -80,3 +80,16 @@ export const useAuth = () => {
 
   return { login, loading, error };
 };
+
+export const useGoogleAuth = () => {
+  const loading = ref(false);
+  const error = ref<Error | null>(null);
+
+  const googleLogin = () => {
+    loading.value = true;
+    error.value = null;
+    window.location.href = "http://localhost:3001/auth/google";
+  };
+
+  return { googleLogin, loading, error };
+};

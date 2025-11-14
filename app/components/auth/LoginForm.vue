@@ -19,7 +19,8 @@
 
             <div class="w-full flex justify-center items-center flex-col gap-y-4">
                 <p>Oppure</p>
-                <GenericButton label="Continua con Google" variant="secondary" icon-name="logos:google-icon" />
+                <GenericButton label="Continua con Google" variant="secondary" icon-name="logos:google-icon"
+                    @click="googleLogin" />
             </div>
         </div>
     </form>
@@ -37,6 +38,9 @@ import { LoginSchemaPayload } from '~/schemas/payloads/auth.payload.schema'
 
 const router = useRouter()
 const { login, error: loginError } = useAuth()
+
+const { googleLogin } = useGoogleAuth()
+
 
 
 const { handleSubmit, meta } = useForm({
