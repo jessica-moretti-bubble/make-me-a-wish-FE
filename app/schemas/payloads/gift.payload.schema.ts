@@ -5,7 +5,14 @@ export const GiftSchema = z.object({
   description: z.string(),
   categoryId: z.string().optional(),
   imageKey: z.string().optional(),
-  isReceived: z.boolean().default(false).optional(),
+  reservation: z
+    .object({
+      userId: z.string().optional(),
+      isReserved: z.boolean().default(false),
+      note: z.string().optional(),
+    })
+    .optional(),
+
   location: z
     .object({
       lat: z.string(),
@@ -23,8 +30,17 @@ export const GiftSchemaQueryPayload = z.object({
   categoryId: z.string(),
 });
 
+export const GiftReservationPayloadSchema = z.object({
+  isReserved: z.boolean().default(false),
+  note: z.string().default("").optional(),
+});
+
 export type GiftPayload = z.infer<typeof GiftSchemaPayload>;
 
 export type GiftQueryPayload = z.infer<typeof GiftSchemaQueryPayload>;
+
+export type GiftReservationPayload = z.infer<
+  typeof GiftReservationPayloadSchema
+>;
 
 export type GiftItem = z.infer<typeof GiftSchema>;

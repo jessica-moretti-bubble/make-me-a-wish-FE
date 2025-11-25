@@ -9,6 +9,6 @@
 </template>
 
 <script setup lang="ts">
-import FormBox from '~/components/auth/FormBox.vue'
-import ConfirmationForm from '~/components/auth/ConfirmationForm.vue';
+import ConfirmationForm from '~/components/v2/signup/ConfirmationForm.vue';
+import FormBox from '~/components/v2/signup/FormBox.vue';
 </script>

@@ -5,6 +5,8 @@ import type { GiftItem } from "~/schemas/payloads/gift.payload.schema";
 export const useWishesStore = defineStore("wishes", {
   state: (): WishesStore => ({
     selectedWish: undefined,
+    showAddGiftModal: false,
+    showUpdateGiftModal: false,
     wishes: [],
   }),
 
@@ -13,24 +15,15 @@ export const useWishesStore = defineStore("wishes", {
       this.selectedWish = wish;
     },
 
-    async fetcHWishes() {
-      const wishlistsStore = useWishlistsStore();
-      const { data } = await getWishes({
-        categoryId: wishlistsStore.selectedCategory?._id ?? "",
-      });
-      this.wishes = data.value || [];
+    setShowAddGiftModal(show: boolean) {
+      this.showAddGiftModal = show;
+    },
+    setShowUpdateGiftModal(show: boolean) {
+      this.showUpdateGiftModal = show;
     },
 
-    async createWishAndRefetch(payload: GiftItem) {
-      const wishlistsStore = useWishlistsStore();
-
-      await createWish(payload);
-      await wishlistsStore.fetchWishlists();
-    },
-
-    async deleteWishAndRefetch(categoryId: string, wishId: string) {
-      await deleteWish(categoryId, wishId);
-      await this.fetcHWishes();
+    setWishes(wishes: GiftItem[]) {
+      this.wishes = wishes;
     },
   },
   persist: true,

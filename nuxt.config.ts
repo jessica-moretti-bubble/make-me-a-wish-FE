@@ -49,7 +49,7 @@ export default defineNuxtConfig({
     storesDirs: ["./stores"],
   },
 
-  css: ["~/assets/css/tailwind.css"],
+  css: ["~/assets/css/tailwind.css", "@/assets/css/global.css"],
 
   postcss: {
     plugins: {

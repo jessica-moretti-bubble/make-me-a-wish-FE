@@ -7,6 +7,13 @@ export const GiftResponseSchema = z.array(
     categoryId: z.string().optional(),
     imageKey: z.string().optional(),
     isReceived: z.boolean().default(false).optional(),
+    reservation: z
+      .object({
+        userId: z.string().optional(),
+        isReserved: z.boolean().default(false),
+        note: z.string().optional(),
+      })
+      .optional(),
     location: z
       .object({
         lat: z.string(),

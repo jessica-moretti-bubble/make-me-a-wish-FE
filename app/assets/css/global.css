@@ -1,15 +1,22 @@
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
 
+::-webkit-scrollbar-track {
+  background: transparent;
+}
 
+::-webkit-scrollbar-thumb {
+  background-color: #ec4899;
+  border-radius: 10px;
+}
 
+::-webkit-scrollbar-thumb:hover {
+  background-color: #db2777;
+}
 
-.scroll-hide {
-    scrollbar-width: none;
-    -ms-overflow-style: none; 
-  }
-  
-  .scroll-hide::-webkit-scrollbar {
-    display: none; 
-  }
-  
-
- 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ec4899 transparent; 
+}

@@ -4,20 +4,21 @@
 
         <WIshActionHeader title="Modifica regalo" />
 
-        <NewWishForm :initial-data="normalizedWish" />
+        <CreateGiftModal :initial-data="normalizedWish" />
 
     </div>
 
 </template>
 
 <script setup lang="ts">
-import NewWishForm from '~/components/dashboard/new-wish/NewWishForm.vue';
-import WIshActionHeader from '~/components/dashboard/wish-form/WIshActionHeader.vue';
+import WIshActionHeader from '~/components/v2/dashboard/gifts/form/WIshActionHeader.vue';
 import { useWishesStore } from '~/stores/wishes.store';
 import { useRoute } from 'vue-router';
 import { computed } from 'vue';
+import CreateGiftModal from '~/components/v2/dashboard/gifts/form/CreateGiftModal.vue';
 
 const route = useRoute()
+
 const id = route.params.id as string
 
 const wishesStore = useWishesStore()
@@ -41,7 +42,7 @@ const normalizedWish = computed(() => {
         locationUrl: w.locationUrl ?? "",
         price: w.price ?? null,
         imageKey: w.imageKey ?? null,
-        isReceived: w.isReceived ?? false,
+        //isReserved: w.reservation?.isReserved ?? false,
     }
 })
 </script>

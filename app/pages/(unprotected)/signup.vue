@@ -1,12 +1,11 @@
 <template>
-    <div class="unprotected-layout general-bg">
-        <FormBox title="Crea il tuo account" description="Inizia oggi stesso" icon-name="bxs:user">
-            <SignupForm />
-        </FormBox>
+    <div class="grid grid-cols-2 h-screen overflow-hidden">
+        <SignupHero />
+        <SignupForm />
     </div>
 </template>
 
 <script setup lang="ts">
-import FormBox from '~/components/auth/FormBox.vue'
-import SignupForm from '~/components/auth/SignupForm.vue';
+import SignupHero from '~/components/v2/signup/SignupHero.vue';
+import SignupForm from '~/components/v2/signup/SignupForm.vue';
 </script>

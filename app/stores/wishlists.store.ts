@@ -1,12 +1,13 @@
 import { defineStore } from "pinia";
 import type { WishlistStore } from "~/model/store.model";
 import type { WishlistItem } from "~/model/wishlist.model";
-import type { GiftPayload } from "~/schemas/payloads/gift.payload.schema";
 import type { UpdateWishlistPayload } from "~/schemas/payloads/wish.payload.schema";
 
 export const useWishlistsStore = defineStore("wishlists", {
   state: (): WishlistStore => ({
     selectedCategory: undefined,
+    showAddWishlistModal: false,
+    showUpdateWishlistModal: false,
     categories: [],
   }),
 
@@ -15,14 +16,24 @@ export const useWishlistsStore = defineStore("wishlists", {
       this.selectedCategory = category;
     },
 
+    setShowAddWishlistModal(show: boolean) {
+      this.showAddWishlistModal = show;
+    },
+
+    setShowUpdateWishlistModal(show: boolean) {
+      this.showUpdateWishlistModal = show;
+    },
+
     async fetchWishlists() {
       const { data } = await getWishlists();
       this.categories = data.value || [];
+      if (this.categories.length > 0 && !this.selectedCategory) {
+        this.selectedCategory = this.categories[0];
+      }
     },
 
     async createWishlistAndRefetch(payload: WishlistItem) {
-      const data = await createWishlist(payload);
-      console.log(data, "ooooo");
+      await createWishlist(payload);
       await this.fetchWishlists();
     },
 
@@ -31,23 +42,23 @@ export const useWishlistsStore = defineStore("wishlists", {
       categoryId: string;
     }) {
       await updateWishlist(payload);
-      // this.selectedCategory = payload;
       await this.fetchWishlists();
+
+      const updatedCategory = this.categories.find(
+        (c) => c._id === payload.categoryId
+      );
+      if (updatedCategory) {
+        this.selectedCategory = updatedCategory;
+      }
     },
 
     async deleteWishlistAndRefetch(categoryId: string) {
       await deleteWishlist(categoryId);
-      this.selectedCategory = undefined;
       await this.fetchWishlists();
-    },
-
-    async updateGiftAndRefetch(payload: {
-      body: GiftPayload;
-      params: { categoryId: string; giftId: string };
-    }) {
-      await updateGift({ body: payload.body, params: payload.params });
-      // this.selectedCategory = payload;
-      await this.fetchWishlists();
+      if (this.selectedCategory?._id === categoryId) {
+        this.selectedCategory =
+          this.categories.length > 0 ? this.categories[0] : undefined;
+      }
     },
   },
   persist: true,

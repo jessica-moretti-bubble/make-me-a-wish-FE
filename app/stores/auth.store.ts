@@ -38,6 +38,8 @@ export const useAuthStore = defineStore("auth", {
     },
     clearUser() {
       const wishlistsStore = useWishlistsStore();
+      const wishesStore = useWishesStore();
+
       this.username = undefined;
       this.email = undefined;
       this.name = undefined;
@@ -46,6 +48,8 @@ export const useAuthStore = defineStore("auth", {
       this.accessToken = undefined;
       this.profileIsCompleted = undefined;
       wishlistsStore.selectedCategory = undefined;
+      wishlistsStore.categories = [];
+      wishesStore.wishes = [];
     },
   },
   persist: true,

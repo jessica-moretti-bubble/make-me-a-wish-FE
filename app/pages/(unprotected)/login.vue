@@ -1,15 +1,13 @@
 <template>
-    <div class="unprotected-layout general-bg">
-        <FormBox title="Benvenuto" description="Accedi al tuo account" icon-name="bxs:user">
-            <LoginForm />
-        </FormBox>
+    <div class="grid grid-cols-2 h-screen">
+        <LoginHero />
+        <LoginForm />
     </div>
 </template>
 
 <script setup lang="ts">
-import FormBox from '~/components/auth/FormBox.vue';
-import LoginForm from '~/components/auth/LoginForm.vue';
-
+import LoginForm from '~/components/v2/login/LoginForm.vue';
+import LoginHero from '~/components/v2/login/LoginHero.vue';
 definePageMeta({
     middleware: [
         'auth',

@@ -1,9 +1,6 @@
 import { ref } from "vue";
 import { WishlistItemSchema, type WishlistItem } from "~/model/wishlist.model";
-import {
-  GiftSchemaPayload,
-  type GiftPayload,
-} from "~/schemas/payloads/gift.payload.schema";
+
 import {
   UpdateWishlistPayloadSchema,
   type UpdateWishlistPayload,
@@ -94,33 +91,6 @@ export const updateWishlist = async (payload: {
       method: "PATCH",
       body: parsedPayload,
     });
-  } catch (err) {
-    error.value = err as Error;
-  } finally {
-    loading.value = false;
-  }
-
-  return { error, loading };
-};
-
-export const updateGift = async (payload: {
-  body: GiftPayload;
-  params: { categoryId: string; giftId: string };
-}) => {
-  const loading = ref(true);
-
-  const error = ref<Error | null>(null);
-
-  const parsedPayload = GiftSchemaPayload.parse(payload.body);
-
-  try {
-    await $fetch(
-      `http://localhost:3001/wishlists/${payload.params.categoryId}/gifts/${payload.params.giftId}`,
-      {
-        method: "PATCH",
-        body: parsedPayload,
-      }
-    );
   } catch (err) {
     error.value = err as Error;
   } finally {

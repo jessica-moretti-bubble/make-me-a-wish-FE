@@ -6,7 +6,6 @@ export default defineNuxtPlugin(() => {
       const token = authStore.accessToken;
       const url = typeof request === "string" ? request : request.url;
 
-      // rotte pubbliche esatte
       const publicEndpoints = [
         "http://localhost:3001/auth/login",
         "http://localhost:3001/auth/register",

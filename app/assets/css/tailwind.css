@@ -28,6 +28,15 @@
   .bg-gradient-primary {
     background-image: linear-gradient(135deg, #6753D9 0%, #8A75FF 100%);
   }
+  .scroll-hide {
+    scrollbar-width: none;      
+    -ms-overflow-style: none;  
+  }
+
+  .scroll-hide::-webkit-scrollbar {
+    display: none;             
+  }
+
 }
 
 @layer components {
@@ -37,6 +46,13 @@
   .unprotected-layout {
     @apply flex justify-center items-center h-screen
   }
+
+
+
+
+
+ 
 }
+
 
 
