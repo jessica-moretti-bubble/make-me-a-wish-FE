@@ -14,6 +14,8 @@
         <CreateGiftModal v-if="useWishesStore().showUpdateGiftModal" :key="wishesStore.selectedWish?._id"
             :initial-data="wishesStore.selectedWish" />
 
+        <DeleteGiftModal v-if="useWishesStore().showDeleteGiftModal" />
+
     </ClientOnly>
 </template>
 
@@ -24,6 +26,7 @@ import WishItem from '~/components/v2/dashboard/gifts/item/WishItem.vue';
 import WishlistToolbar from './WishlistToolbar.vue';
 import NoGiftPlaceholder from './NoGiftPlaceholder.vue';
 import CreateGiftModal from '../../gifts/form/CreateGiftModal.vue';
+import DeleteGiftModal from '../../gifts/form/DeleteGiftModal.vue';
 const wishlistsStore = useWishlistsStore();
 
 const wishesStore = useWishesStore()

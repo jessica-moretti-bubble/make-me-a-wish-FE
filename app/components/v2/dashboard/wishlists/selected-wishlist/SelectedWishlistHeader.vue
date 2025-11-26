@@ -11,28 +11,25 @@
                 </div>
             </div>
         </div>
-        <div class="flex items-center gap-x-4">
-            <GenericSelectOptions v-model="selected" :options="[
-                { value: 'privata', label: 'Privata' },
-                { value: 'pubblica', label: 'Pubblica' }
-            ]" />
-            <GenericButton label="Aggiungi regalo" size="md" variant="purpleLightGradient"
+        <div class="flex items-center justify-end gap-x-8">
+            <GenericButton label="Aggiungi regalo" size="md" variant="purpleLightGradient" class="w-[50%]!"
                 @click="wishesStore.setShowAddGiftModal(true)">
                 <Icon name="material-symbols:add" style="scale: 1.2" class="text-white" />
             </GenericButton>
             <button class="cursor-pointer" @click="wishlistsStore.setShowUpdateWishlistModal(true)">
                 <Icon name="material-symbols:settings-heart" style="scale: 1.4" class="text-[#4B5563]" />
             </button>
+            <button class="cursor-pointer" @click="wishlistsStore.setShowDeleteWishlistModal(true)">
+                <Icon name="material-symbols:delete-forever-sharp" style="scale: 1.4" class="text-[#4B5563]" />
+            </button>
 
         </div>
     </div>
 
-    <CreateWishlistModal v-if="wishlistsStore.showUpdateWishlistModal" :key="`modal-${Date.now()}`" :initial-data="{
-        name: wishlistsStore.selectedCategory?.name ?? '',
-        iconName: wishlistsStore.selectedCategory?.iconName ?? '',
-        gifts: wishlistsStore.selectedCategory?.gifts ?? [],
-        _id: wishlistsStore.selectedCategory?._id ?? ''
-    }" />
+    <CreateWishlistModal v-if="wishlistsStore.showUpdateWishlistModal" :key="wishlistsStore.selectedCategory?._id"
+        :initial-data="wishlistsStore.selectedCategory" />
+
+    <DeleteWishlistModal v-if="wishlistsStore.showDeleteWishlistModal" />
 
     <CreateGiftModal v-if="wishesStore.showAddGiftModal" />
 
@@ -43,15 +40,14 @@
 <script lang="ts" setup>
 import GenericButton from '~/components/v2/common/buttons/GenericButton.vue'
 import CreateWishlistModal from '~/components/v2/dashboard/wishlists/form/CreateWishlistModal.vue'
-import { ref } from 'vue'
 import WishlistIcon from './WishlistIcon.vue'
-import GenericSelectOptions from '~/components/v2/common/inputs/GenericSelectOptions.vue'
 import CreateGiftModal from '~/components/v2/dashboard/gifts/form/CreateGiftModal.vue'
+import DeleteWishlistModal from '../form/DeleteWishlistModal.vue'
 
 const wishlistsStore = useWishlistsStore()
 
+
 const wishesStore = useWishesStore()
 
-const selected = ref('Privata')
 
 </script>

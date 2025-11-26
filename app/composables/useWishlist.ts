@@ -2,8 +2,8 @@ import { ref } from "vue";
 import { WishlistItemSchema, type WishlistItem } from "~/model/wishlist.model";
 
 import {
-  UpdateWishlistPayloadSchema,
-  type UpdateWishlistPayload,
+  WishlistPayloadSchema,
+  type WishlistPayload,
 } from "~/schemas/payloads/wish.payload.schema";
 import {
   WishlistResponseSchema,
@@ -51,7 +51,7 @@ export const deleteWishlist = async (id: string) => {
   return { error, loading };
 };
 
-export const createWishlist = async (payload: WishlistItem) => {
+export const createWishlist = async (payload: WishlistPayload) => {
   const loading = ref(true);
   const error = ref<Error | null>(null);
   const parsedPayload = WishlistItemSchema.parse(payload);
@@ -79,12 +79,12 @@ export const createWishlist = async (payload: WishlistItem) => {
 };
 
 export const updateWishlist = async (payload: {
-  body: UpdateWishlistPayload;
+  body: WishlistPayload;
   categoryId: string;
 }) => {
   const loading = ref(true);
   const error = ref<Error | null>(null);
-  const parsedPayload = UpdateWishlistPayloadSchema.parse(payload.body);
+  const parsedPayload = WishlistPayloadSchema.parse(payload.body);
 
   try {
     await $fetch(`http://localhost:3001/wishlists/${payload.categoryId}`, {

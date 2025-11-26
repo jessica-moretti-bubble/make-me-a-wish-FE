@@ -17,6 +17,7 @@ export interface WishlistStore {
   categories: WishlistItem[];
   showUpdateWishlistModal: boolean;
   showAddWishlistModal: boolean;
+  showDeleteWishlistModal: boolean;
 }
 
 export interface WishesStore {
@@ -24,6 +25,7 @@ export interface WishesStore {
   wishes: GiftItem[];
   showAddGiftModal: boolean;
   showUpdateGiftModal: boolean;
+  showDeleteGiftModal: boolean;
 }
 
 export interface ProfileStore {

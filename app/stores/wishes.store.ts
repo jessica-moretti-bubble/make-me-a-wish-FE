@@ -7,6 +7,7 @@ export const useWishesStore = defineStore("wishes", {
     selectedWish: undefined,
     showAddGiftModal: false,
     showUpdateGiftModal: false,
+    showDeleteGiftModal: false,
     wishes: [],
   }),
 
@@ -18,6 +19,11 @@ export const useWishesStore = defineStore("wishes", {
     setShowAddGiftModal(show: boolean) {
       this.showAddGiftModal = show;
     },
+
+    setShowDeleteGiftModal(show: boolean) {
+      this.showDeleteGiftModal = show;
+    },
+
     setShowUpdateGiftModal(show: boolean) {
       this.showUpdateGiftModal = show;
     },

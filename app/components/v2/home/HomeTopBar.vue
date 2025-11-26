@@ -14,8 +14,7 @@
 <script setup lang="ts">
 
 import { ref } from "vue";
-import LogoutModal from "~/components/dashboard/LogoutModal.vue";
-
+import LogoutModal from "../dashboard/LogoutModal.vue";
 const showLogoutModal = ref(false);
 
 </script>

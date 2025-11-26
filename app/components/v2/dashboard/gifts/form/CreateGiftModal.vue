@@ -46,15 +46,9 @@
                             icon-name="material-symbols:add-link" placeholder="https://example.com/product" />
                     </InputFormWrapper>
 
-                    <InputFormWrapper description="Inserisci il titolo dell'eventuale data speciale">
-                        <GenericInput label="Data speciale" icon-name="material-symbols:add-link"
-                            placeholder="Compleanno, Natale, Anniversario..." />
-                    </InputFormWrapper>
 
 
-                    <InputFormWrapper description="Indica la data entro cui il regalo deve essere acquistato">
-                        <input type="date" class="h-[52px] border border-[#D1D5DB] p-4 rounded-lg" />
-                    </InputFormWrapper>
+
 
                 </div>
             </div>

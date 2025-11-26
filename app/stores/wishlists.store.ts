@@ -8,6 +8,7 @@ export const useWishlistsStore = defineStore("wishlists", {
     selectedCategory: undefined,
     showAddWishlistModal: false,
     showUpdateWishlistModal: false,
+    showDeleteWishlistModal: false,
     categories: [],
   }),
 
@@ -18,6 +19,10 @@ export const useWishlistsStore = defineStore("wishlists", {
 
     setShowAddWishlistModal(show: boolean) {
       this.showAddWishlistModal = show;
+    },
+
+    setShowDeleteWishlistModal(show: boolean) {
+      this.showDeleteWishlistModal = show;
     },
 
     setShowUpdateWishlistModal(show: boolean) {

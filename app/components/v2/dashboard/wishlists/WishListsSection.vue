@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/first-attribute-linebreak -->
 <template>
     <div class="bg-white w-full max-w-[320px] max-h-[460px] rounded-[18px] p-6 shadow-2xl border-r border-gray-200">
 

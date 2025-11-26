@@ -10,9 +10,8 @@ import { ref, watch } from 'vue'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useField, useForm } from 'vee-validate'
 import { useDebounceFn } from '@vueuse/core'
-import GenericInput from '../v2/common/inputs/GenericInput.vue'
 import { SearchUsersPayloadParamsSchema } from '~/schemas/payloads/users.payload.schema'
-
+import GenericInput from '../../common/inputs/GenericInput.vue'
 
 const emit = defineEmits(['getProfiles'])
 
